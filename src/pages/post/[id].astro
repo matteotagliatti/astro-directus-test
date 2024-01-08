@@ -3,6 +3,11 @@ import { readItem } from "@directus/sdk";
 import Layout from "../../layouts/Layout.astro";
 import directus from "../../utils/directus";
 const { id } = Astro.params;
+
+if (!id) {
+  throw new Error("Missing id");
+}
+
 const post = await directus.request(readItem("posts", id));
 ---
 

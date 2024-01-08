@@ -1,5 +1,6 @@
 import { createDirectus, rest } from "@directus/sdk";
+const data = import.meta.env.PUBLIC_DIRECTUS_URL;
 
-const directus = createDirectus("http://localhost:8055").with(rest());
+const directus = createDirectus<MySchema>(data).with(rest());
 
 export default directus;

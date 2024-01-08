@@ -15,6 +15,7 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} - Astro + Directus</title>
+    <ViewTransitions fallback="swap" />
   </head>
   <body class="max-w-2xl mx-auto p-10 min-h-screen">
     <slot />

@@ -1,10 +1,15 @@
 ---
-import { readItems } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 import Layout from "../layouts/Layout.astro";
 import directus from "../utils/directus";
 
-const home = await directus.request(readItems("home"));
-const posts = await directus.request(readItems("posts"));
+const home = await directus.request(readSingleton("home"));
+const posts = await directus.request(
+  readItems("posts", {
+    fields: ["id", "title"],
+    sort: "-id",
+  })
+);
 ---
 
 <Layout title="Home">
