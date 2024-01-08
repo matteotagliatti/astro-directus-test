@@ -1,5 +1,3 @@
-# Astro + Direcuts con SSR
+# Astro + Direcuts
 
-Esempio fatto con Deploy su **Vercel**.
-
-Per deploy su nostra istanza di Node.js vedere [qui](https://docs.astro.build/en/guides/integrations-guide/node/).
+Esempio per generazione sito web statico.
