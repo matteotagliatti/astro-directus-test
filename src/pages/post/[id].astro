@@ -1,14 +1,27 @@
 ---
-import { readItem } from "@directus/sdk";
+import { readItems } from "@directus/sdk";
 import Layout from "../../layouts/Layout.astro";
 import directus from "../../utils/directus";
-const { id } = Astro.params;
 
-if (!id) {
-  throw new Error("Missing id");
+interface Props {
+  post: {
+    id: number;
+    title: string;
+    body: string;
+  };
 }
 
-const post = await directus.request(readItem("posts", id));
+const { post } = Astro.props;
+
+export async function getStaticPaths() {
+  const posts = await directus.request(readItems("posts"));
+  return posts.map((post) => {
+    return {
+      params: { id: post.id.toString() },
+      props: { post },
+    };
+  });
+}
 ---
 
 <Layout title={post.title}>
