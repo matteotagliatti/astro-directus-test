@@ -1,0 +1,12 @@
+---
+import { readItem } from "@directus/sdk";
+import Layout from "../../layouts/Layout.astro";
+import directus from "../../utils/directus";
+const { id } = Astro.params;
+const post = await directus.request(readItem("posts", id));
+---
+
+<Layout title={post.title}>
+  <h1 class="font-semibold text-xl">{post.title}</h1>
+  <p>{post.body}</p>
+</Layout>

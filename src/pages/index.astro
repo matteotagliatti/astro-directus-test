@@ -1,16 +1,29 @@
 ---
+import { readItems } from "@directus/sdk";
+import Layout from "../layouts/Layout.astro";
+import directus from "../utils/directus";
 
+const home = await directus.request(readItems("home"));
+const posts = await directus.request(readItems("posts"));
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="mb-4">
+    <h1 class="font-bold text-2xl">{home.title}</h1>
+    <p>{home.description}</p>
+  </section>
+  <section>
+    <h2 class="font-semibold text-xl">Posts</h2>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a class="underline" href={`/post/${post.id}`}>
+              {post.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
